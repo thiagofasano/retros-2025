@@ -94,12 +94,14 @@ import {
   Award,
 } from "lucide-react"
 
-const metrics = [
+const getMetrics = (userName: string) => [
   {
     label: "Infraestrutura em Nuvem",
     icon: <Cloud className="h-8 w-8" />,
     message:
-      "Vamos começar pela Infraestrutura em Nuvem! Em 2025, a equipe de TI realizou conquistas impressionantes na modernização e fortalecimento da nossa infraestrutura.",
+      userName
+        ? `${userName}, vamos começar pela Infraestrutura em Nuvem! Olha só que conquistas impressionantes a equipe de TI realizou em 2025 na modernização da nossa infraestrutura!`
+        : "Vamos começar pela Infraestrutura em Nuvem! Em 2025, a equipe de TI realizou conquistas impressionantes na modernização e fortalecimento da nossa infraestrutura.",
     highlights: [
       {
         title: "Migração Azure",
@@ -301,7 +303,8 @@ const metrics = [
   },
 ]
 
-export function RetrospectiveChat() {
+export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
+  const metrics = getMetrics(userName)
   const [currentStep, setCurrentStep] = useState(-1)
   const [showMetric, setShowMetric] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
@@ -334,7 +337,7 @@ export function RetrospectiveChat() {
         setCurrentStep(0)
         setShowMetric(false)
         setProgress(0)
-      }, 4000)
+      }, 6000)
 
       return () => {
         clearTimeout(timer)
@@ -442,7 +445,9 @@ export function RetrospectiveChat() {
   const getCurrentContent = () => {
     if (currentStep === -1) {
       return {
-        text: "Olá! Eu sou um Robô criado pela TI para apresentar a Retrospectiva de 2025 do departamento. Vamos juntos conhecer?",
+        text: userName 
+          ? `Olá ${userName}! Prazer em conhecer! Eu sou um Robô criado pela TI para apresentar a Retrospectiva. Vamos juntos conhecer os resultados`
+          : "Olá! Eu sou um Robô criado pela TI para apresentar a Retrospectiva de 2025 do departamento. Vamos juntos conhecer?",
         metric: null,
       }
     }

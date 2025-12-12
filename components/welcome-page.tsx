@@ -4,11 +4,22 @@ import { Button } from "@/components/ui/button"
 import { Bot, Sparkles } from "lucide-react"
 import Image from "next/image"
 
+import { useState } from "react"
+import { Input } from "@/components/ui/input"
+
 type WelcomePageProps = {
-  onStart: () => void
+  onStart: (name: string) => void
 }
 
 export function WelcomePage({ onStart }: WelcomePageProps) {
+  const [name, setName] = useState("")
+
+  const handleStart = () => {
+    // if (name.trim()) {
+      onStart(name.trim())
+    // }
+  }
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="max-w-2xl w-full text-center space-y-8 animate-in fade-in-0 slide-in-from-bottom-4 duration-700">
@@ -44,18 +55,29 @@ export function WelcomePage({ onStart }: WelcomePageProps) {
           <h1 className="text-4xl md:text-5xl font-bold leading-tight text-balance">
             Vamos conhecer juntos os principais resultados do departamento de TI?
           </h1>
-          {/* <p className="text-lg text-muted-foreground text-pretty max-w-xl mx-auto">
-            Prepare-se para uma jornada interativa pelos números e conquistas de 2025
-          </p> */}
+          <p className="text-lg text-muted-foreground text-pretty max-w-xl mx-auto">
+            Informe seu nome e clique em ver retrospectiva para começar a explorar as conquistas de 2025!
+          </p>
         </div>
 
-        <br />
+        {/* Name Input */}
+        <div className="space-y-4 max-w-md mx-auto">
+          <Input
+            type="text"
+            placeholder="Digite seu nome..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleStart()}
+            className="text-center text-lg h-14 bg-card/80 backdrop-blur-sm border-2 border-primary/30 focus:border-primary"
+          />
+        </div>
 
         {/* Start Button */}
         <Button
           size="lg"
-          className="text-lg px-12 py-4 h-auto gap-3 shadow-lg hover:shadow-xl transition-all w-full max-w-md animate-pulse hover:animate-none cursor-pointer"
-          onClick={onStart}
+          // disabled={!name.trim()}
+          className="text-lg px-12 py-4 h-auto gap-3 shadow-lg hover:shadow-xl transition-all w-full max-w-md animate-pulse hover:animate-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={handleStart}
         >
           <span>Ver Retrospectiva</span>
           <Sparkles className="h-5 w-5" />

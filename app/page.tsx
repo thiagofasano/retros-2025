@@ -6,10 +6,14 @@ import { RetrospectiveChat } from "@/components/retrospective-chat"
 
 export default function Page() {
   const [hasStarted, setHasStarted] = useState(false)
+  const [userName, setUserName] = useState("")
 
   if (!hasStarted) {
-    return <WelcomePage onStart={() => setHasStarted(true)} />
+    return <WelcomePage onStart={(name) => {
+      setUserName(name)
+      setHasStarted(true)
+    }} />
   }
 
-  return <RetrospectiveChat />
+  return <RetrospectiveChat userName={userName} />
 }
