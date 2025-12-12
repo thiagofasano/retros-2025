@@ -665,19 +665,96 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
 
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center p-8">
-            <div className="text-center space-y-6 animate-in fade-in-0 zoom-in-95 duration-700 max-w-2xl">
-              <Card className="p-10 bg-primary/5 border-primary/20">
-                <Sparkles className="h-16 w-16 text-primary mx-auto mb-4" />
-                <p className="text-3xl font-semibold mb-4 text-balance">Tecnologia da Informação</p>
-                <p className="text-muted-foreground text-xl text-pretty">
-                  Foi um 2025 cheio de desafios e realizações. <br/ >Vamos em busca de mais conquistas!
+          <div className="flex-1 overflow-y-auto p-4 md:p-8">
+            <div className="max-w-7xl mx-auto space-y-8">
+              {/* Header */}
+              <div className="text-center space-y-6 animate-in fade-in-0 zoom-in-95 duration-700">
+                {/* Robot celebrating */}
+                <div className="flex justify-center">
+                  <div className="relative animate-bounce">
+                    <div className="absolute inset-0 bg-primary/30 blur-2xl rounded-full animate-pulse" />
+                    <div className="relative h-32 w-32 rounded-full bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 flex items-center justify-center">
+                      <Bot className="h-20 w-20 text-primary animate-pulse" strokeWidth={1.5} />
+                      <div className="absolute -top-2 -right-2 animate-spin">
+                        <Sparkles className="h-10 w-10 text-yellow-400" />
+                      </div>
+                      <div className="absolute -bottom-2 -left-2 animate-ping">
+                        <Sparkles className="h-8 w-8 text-primary" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-bold text-balance">
+                  {userName ? `${userName}, veja tudo que foi feito junto!` : 'Veja tudo que foi feito junto!'}
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Um resumo completo de todas as conquistas e resultados do departamento de TI em 2025
                 </p>
-              </Card>
-              <Button onClick={handleRestart} variant="outline" size="lg" className="gap-2 bg-transparent">
-                Ver Novamente
-                <Sparkles className="h-4 w-4" />
-              </Button>
+              </div>
+
+              {/* All Metrics Summary */}
+              <div className="space-y-8">
+                {metrics.map((metric, idx) => (
+                  <Card key={idx} className="p-6 md:p-8 bg-card/80 backdrop-blur-sm border-2 border-primary/20 animate-in fade-in-0 slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${idx * 100}ms` }}>
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="text-primary/80">{metric.icon}</div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-balance">{metric.label}</h3>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {metric.highlights.map((highlight: any, hIdx: number) => {
+                        const hasNumber = /^\d+[+%]?|^\d+[.,]\d+%/.test(highlight.title)
+                        
+                        if (hasNumber) {
+                          const match = highlight.title.match(/^([\d+%.,]+)\s*(.*)/)
+                          const number = match ? match[1] : highlight.title
+                          const label = match ? match[2] : ""
+                          
+                          return (
+                            <Card key={hIdx} className="p-4 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30">
+                              <div className="text-center space-y-2">
+                                <div className="text-2xl md:text-4xl font-bold text-primary">
+                                  {number}
+                                </div>
+                                <div className="text-sm md:text-base font-semibold text-foreground">
+                                  {label}
+                                </div>
+                                <div className="text-xs md:text-sm text-muted-foreground leading-relaxed pt-2 border-t border-primary/20">
+                                  {highlight.description}
+                                </div>
+                              </div>
+                            </Card>
+                          )
+                        } else {
+                          return (
+                            <Card key={hIdx} className="p-4 bg-card/60 border-primary/20">
+                              <div className="border-l-4 border-primary/50 pl-3 py-1">
+                                <h4 className="text-sm md:text-base font-semibold mb-1 text-primary">{highlight.title}</h4>
+                                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{highlight.description}</p>
+                              </div>
+                            </Card>
+                          )
+                        }
+                      })}
+                    </div>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="text-center space-y-6 pt-8 pb-8">
+                <Card className="p-8 bg-primary/5 border-primary/20 max-w-2xl mx-auto">
+                  <p className="text-2xl md:text-3xl font-semibold mb-4 text-balance">Tecnologia da Informação</p>
+                  <p className="text-muted-foreground text-lg text-pretty">
+                    Foi um 2025 cheio de desafios e realizações. <br />Vamos em busca de mais conquistas!
+                  </p>
+                </Card>
+                <Button onClick={handleRestart} variant="outline" size="lg" className="gap-2 bg-transparent">
+                  Ver Novamente
+                  <Sparkles className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         )}
