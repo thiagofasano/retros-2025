@@ -685,11 +685,11 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
                   </div>
                 </div>
                 
-                <h2 className="text-4xl md:text-5xl font-bold text-balance">
-                  {userName ? `${userName}, veja tudo que foi feito junto!` : 'Veja tudo que foi feito junto!'}
-                </h2>
+                <h3 className="text-4xl md:text-5xl font-bold text-balance">
+                  {userName ? `${userName}, tivemos um 2025 cheio de desafios e realizações. Vamos em busca de mais conquistas!` : 'Tivemos um 2025 cheio de desafios e realizações. Vamos em busca de mais conquistas!'}
+                </h3>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Um resumo completo de todas as conquistas e resultados do departamento de TI em 2025
+                  Um resumo completo de todas as conquistas e resultados do departamento.
                 </p>
               </div>
 
@@ -745,10 +745,10 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
               {/* Footer */}
               <div className="text-center space-y-6 pt-8 pb-8">
                 <Card className="p-8 bg-primary/5 border-primary/20 max-w-2xl mx-auto">
-                  <p className="text-2xl md:text-3xl font-semibold mb-4 text-balance">Tecnologia da Informação</p>
+                  {/* <p className="text-2xl md:text-3xl font-semibold mb-4 text-balance">Tecnologia da Informação</p>
                   <p className="text-muted-foreground text-lg text-pretty">
                     Foi um 2025 cheio de desafios e realizações. <br />Vamos em busca de mais conquistas!
-                  </p>
+                  </p> */}
                 </Card>
                 <Button onClick={handleRestart} variant="outline" size="lg" className="gap-2 bg-transparent">
                   Ver Novamente
