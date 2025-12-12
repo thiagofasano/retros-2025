@@ -736,7 +736,7 @@ function RetrospectiveChat() {
             const timer = setTimeout({
                 "RetrospectiveChat.useEffect.timer": ()=>{
                     if (audioRef.current) {
-                        audioRef.current.volume = 0.3;
+                        audioRef.current.volume = 0.2;
                         audioRef.current.play().catch(console.error);
                         setIsPlaying(true);
                     }
@@ -1256,7 +1256,7 @@ function RetrospectiveChat() {
                                             columnNumber: 23
                                         }, this),
                                         content.metric && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex items-start gap-0 md:gap-4 -mt-2",
+                                            className: "flex items-start gap-0 md:gap-4 -mt-2 md:-mt-12",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "flex-shrink-0 w-0 md:w-32 hidden md:block"

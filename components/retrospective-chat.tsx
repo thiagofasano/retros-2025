@@ -597,7 +597,7 @@ export function RetrospectiveChat() {
                       </div>
 
                       {content.metric && (
-                        <div className="flex items-start gap-0 md:gap-4 -mt-2">
+                        <div className="flex items-start gap-0 md:gap-4 -mt-2 md:-mt-12">
                           <div className="flex-shrink-0 w-0 md:w-32 hidden md:block" />
                           <Card className="p-4 md:p-10 bg-card/80 backdrop-blur-sm border-2 border-primary/30 hover:border-primary/50 transition-colors animate-in fade-in-0 zoom-in-95 duration-500 w-full">
                             <div className="flex items-start justify-between gap-6 mb-6">
