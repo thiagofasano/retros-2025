@@ -366,6 +366,64 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 ;
 ;
 ;
+function AnimatedNumber({ value }) {
+    const [displayValue, setDisplayValue] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        // Extrair apenas números do valor
+        const numericMatch = value.match(/[\d.,]+/);
+        if (!numericMatch) {
+            setDisplayValue(0);
+            return;
+        }
+        const numericString = numericMatch[0].replace(/\./g, '').replace(',', '.');
+        const targetValue = parseFloat(numericString);
+        if (isNaN(targetValue)) {
+            setDisplayValue(0);
+            return;
+        }
+        const duration = 1500 // 1.5 segundos
+        ;
+        const steps = 60;
+        const increment = targetValue / steps;
+        let current = 0;
+        let step = 0;
+        const timer = setInterval(()=>{
+            step++;
+            current += increment;
+            if (step >= steps) {
+                setDisplayValue(targetValue);
+                clearInterval(timer);
+            } else {
+                setDisplayValue(current);
+            }
+        }, duration / steps);
+        return ()=>clearInterval(timer);
+    }, [
+        value
+    ]);
+    // Formatar o número de volta
+    const formatNumber = (num)=>{
+        const hasComma = value.includes(',');
+        const hasPlus = value.includes('+');
+        const hasPercent = value.includes('%');
+        let formatted = '';
+        if (hasComma) {
+            // Se tem vírgula, é decimal (ex: 97,63%)
+            formatted = num.toFixed(2).replace('.', ',');
+        } else if (num >= 1000) {
+            // Números grandes sem decimal
+            formatted = Math.round(num).toString();
+        } else {
+            formatted = Math.round(num).toString();
+        }
+        if (hasPlus) formatted += '+';
+        if (hasPercent) formatted += '%';
+        return formatted;
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+        children: formatNumber(displayValue)
+    }, void 0, false);
+}
 ;
 const metrics = [
     {
@@ -374,7 +432,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 32,
+            lineNumber: 100,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Vamos começar pela Infraestrutura em Nuvem! Em 2025, a equipe de TI realizou conquistas impressionantes na modernização e fortalecimento da nossa infraestrutura.",
@@ -399,7 +457,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 52,
+            lineNumber: 120,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Agora vamos falar sobre Otimização e Segurança! A equipe implementou melhorias significativas que aumentaram a eficiência e proteção dos nossos sistemas.",
@@ -436,7 +494,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 84,
+            lineNumber: 152,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Valor para Nossa Equipe! Investimos em ferramentas e processos que melhoram a produtividade e organização do nosso time de TI.",
@@ -461,7 +519,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 104,
+            lineNumber: 172,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Valor para Usuários! Desenvolvemos soluções que fazem diferença no dia a dia de quem utiliza nossos sistemas e serviços.",
@@ -490,7 +548,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 128,
+            lineNumber: 196,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Valor para a Fiotec - Parte 1! Veja os resultados extraordinários que entregamos para a organização em capacitação, melhorias e migrações.",
@@ -515,7 +573,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 148,
+            lineNumber: 216,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Valor para a Fiotec - Parte 2! Mais números impressionantes que demonstram o impacto positivo do trabalho da equipe de TI.",
@@ -540,7 +598,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 168,
+            lineNumber: 236,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Valor para a Fiotec - Parte 3! Continuamos com mais conquistas em infraestrutura, capacitação e soluções tecnológicas.",
@@ -569,7 +627,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 192,
+            lineNumber: 260,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Valor para Fiotec - Parte 4! Avanços importantes em gestão financeira, conformidade e automatização de processos.",
@@ -594,7 +652,7 @@ const metrics = [
             className: "h-8 w-8"
         }, void 0, false, {
             fileName: "[project]/components/retrospective-chat.tsx",
-            lineNumber: 212,
+            lineNumber: 280,
             columnNumber: 11
         }, ("TURBOPACK compile-time value", void 0)),
         message: "Sistema de Bolsas - Melhorias! Implementamos importantes aprimoramentos em performance, segurança e processos do sistema de bolsas.",
@@ -799,12 +857,12 @@ function RetrospectiveChat() {
                     type: "audio/mpeg"
                 }, void 0, false, {
                     fileName: "[project]/components/retrospective-chat.tsx",
-                    lineNumber: 420,
+                    lineNumber: 488,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/retrospective-chat.tsx",
-                lineNumber: 419,
+                lineNumber: 487,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -815,7 +873,7 @@ function RetrospectiveChat() {
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "w-full md:max-w-5xl",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "space-y-2 md:space-y-6 animate-in fade-in-0 slide-in-from-right-10 duration-700",
+                                className: "space-y-2 animate-in fade-in-0 slide-in-from-right-10 duration-700",
                                 children: isTyping ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4",
                                     children: [
@@ -833,17 +891,17 @@ function RetrospectiveChat() {
                                                                 strokeWidth: 1.5
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 435,
+                                                                lineNumber: 503,
                                                                 columnNumber: 31
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                            lineNumber: 434,
+                                                            lineNumber: 502,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 433,
+                                                        lineNumber: 501,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -859,12 +917,12 @@ function RetrospectiveChat() {
                                                                     className: "h-5 w-5"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                    lineNumber: 446,
+                                                                    lineNumber: 514,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 439,
+                                                                lineNumber: 507,
                                                                 columnNumber: 29
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -877,18 +935,18 @@ function RetrospectiveChat() {
                                                                     className: "h-5 w-5"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                    lineNumber: 455,
+                                                                    lineNumber: 523,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 448,
+                                                                lineNumber: 516,
                                                                 columnNumber: 29
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 438,
+                                                        lineNumber: 506,
                                                         columnNumber: 27
                                                     }, this),
                                                     isAutoPlay && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -900,12 +958,12 @@ function RetrospectiveChat() {
                                                             }
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                            lineNumber: 460,
+                                                            lineNumber: 528,
                                                             columnNumber: 31
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 459,
+                                                        lineNumber: 527,
                                                         columnNumber: 29
                                                     }, this),
                                                     currentStep >= 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -917,18 +975,18 @@ function RetrospectiveChat() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 467,
+                                                        lineNumber: 535,
                                                         columnNumber: 29
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                lineNumber: 432,
+                                                lineNumber: 500,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                            lineNumber: 431,
+                                            lineNumber: 499,
                                             columnNumber: 23
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -940,38 +998,38 @@ function RetrospectiveChat() {
                                                         className: "h-3 w-3 rounded-full bg-muted-foreground animate-bounce [animation-delay:-0.3s]"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 475,
+                                                        lineNumber: 543,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "h-3 w-3 rounded-full bg-muted-foreground animate-bounce [animation-delay:-0.15s]"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 476,
+                                                        lineNumber: 544,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "h-3 w-3 rounded-full bg-muted-foreground animate-bounce"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 477,
+                                                        lineNumber: 545,
                                                         columnNumber: 27
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                lineNumber: 474,
+                                                lineNumber: 542,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                            lineNumber: 473,
+                                            lineNumber: 541,
                                             columnNumber: 23
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                    lineNumber: 430,
+                                    lineNumber: 498,
                                     columnNumber: 21
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                     children: [
@@ -992,17 +1050,17 @@ function RetrospectiveChat() {
                                                                         strokeWidth: 1.5
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                                        lineNumber: 488,
+                                                                        lineNumber: 556,
                                                                         columnNumber: 33
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                    lineNumber: 487,
+                                                                    lineNumber: 555,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 486,
+                                                                lineNumber: 554,
                                                                 columnNumber: 29
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1018,12 +1076,12 @@ function RetrospectiveChat() {
                                                                             className: "h-5 w-5"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                                            lineNumber: 499,
+                                                                            lineNumber: 567,
                                                                             columnNumber: 33
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                                        lineNumber: 492,
+                                                                        lineNumber: 560,
                                                                         columnNumber: 31
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1036,18 +1094,18 @@ function RetrospectiveChat() {
                                                                             className: "h-5 w-5"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                                            lineNumber: 508,
+                                                                            lineNumber: 576,
                                                                             columnNumber: 33
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                                        lineNumber: 501,
+                                                                        lineNumber: 569,
                                                                         columnNumber: 31
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 491,
+                                                                lineNumber: 559,
                                                                 columnNumber: 29
                                                             }, this),
                                                             isAutoPlay && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1059,12 +1117,12 @@ function RetrospectiveChat() {
                                                                     }
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                    lineNumber: 513,
+                                                                    lineNumber: 581,
                                                                     columnNumber: 33
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 512,
+                                                                lineNumber: 580,
                                                                 columnNumber: 31
                                                             }, this),
                                                             currentStep >= 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1076,18 +1134,18 @@ function RetrospectiveChat() {
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 520,
+                                                                lineNumber: 588,
                                                                 columnNumber: 31
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 485,
+                                                        lineNumber: 553,
                                                         columnNumber: 27
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                    lineNumber: 484,
+                                                    lineNumber: 552,
                                                     columnNumber: 25
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1101,34 +1159,34 @@ function RetrospectiveChat() {
                                                                 children: "|"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                                lineNumber: 527,
+                                                                lineNumber: 595,
                                                                 columnNumber: 105
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                        lineNumber: 527,
+                                                        lineNumber: 595,
                                                         columnNumber: 27
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                    lineNumber: 526,
+                                                    lineNumber: 594,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                            lineNumber: 483,
+                                            lineNumber: 551,
                                             columnNumber: 23
                                         }, this),
                                         content.metric && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex items-start gap-0 md:gap-4",
+                                            className: "flex items-start gap-0 md:gap-4 -mt-2",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "flex-shrink-0 w-0 md:w-32 hidden md:block"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                    lineNumber: 533,
+                                                    lineNumber: 601,
                                                     columnNumber: 27
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -1144,12 +1202,12 @@ function RetrospectiveChat() {
                                                                         children: content.metric.label
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                                        lineNumber: 537,
+                                                                        lineNumber: 605,
                                                                         columnNumber: 33
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                    lineNumber: 536,
+                                                                    lineNumber: 604,
                                                                     columnNumber: 31
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1157,13 +1215,13 @@ function RetrospectiveChat() {
                                                                     children: content.metric.icon
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                    lineNumber: 541,
+                                                                    lineNumber: 609,
                                                                     columnNumber: 31
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                            lineNumber: 535,
+                                                            lineNumber: 603,
                                                             columnNumber: 29
                                                         }, this),
                                                         content.metric.highlights && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1182,10 +1240,16 @@ function RetrospectiveChat() {
                                                                             children: [
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                     className: "text-3xl md:text-5xl font-bold text-primary",
-                                                                                    children: number
+                                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(AnimatedNumber, {
+                                                                                        value: number
+                                                                                    }, void 0, false, {
+                                                                                        fileName: "[project]/components/retrospective-chat.tsx",
+                                                                                        lineNumber: 626,
+                                                                                        columnNumber: 45
+                                                                                    }, this)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                                    lineNumber: 557,
+                                                                                    lineNumber: 625,
                                                                                     columnNumber: 43
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1193,7 +1257,7 @@ function RetrospectiveChat() {
                                                                                     children: label
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                                    lineNumber: 560,
+                                                                                    lineNumber: 628,
                                                                                     columnNumber: 43
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1201,18 +1265,18 @@ function RetrospectiveChat() {
                                                                                     children: highlight.description
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                                    lineNumber: 563,
+                                                                                    lineNumber: 631,
                                                                                     columnNumber: 43
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                                            lineNumber: 556,
+                                                                            lineNumber: 624,
                                                                             columnNumber: 41
                                                                         }, this)
                                                                     }, index, false, {
                                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                                        lineNumber: 555,
+                                                                        lineNumber: 623,
                                                                         columnNumber: 39
                                                                     }, this);
                                                                 } else {
@@ -1227,7 +1291,7 @@ function RetrospectiveChat() {
                                                                                     children: highlight.title
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                                    lineNumber: 574,
+                                                                                    lineNumber: 642,
                                                                                     columnNumber: 43
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1235,54 +1299,54 @@ function RetrospectiveChat() {
                                                                                     children: highlight.description
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                                                    lineNumber: 575,
+                                                                                    lineNumber: 643,
                                                                                     columnNumber: 43
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                                            lineNumber: 573,
+                                                                            lineNumber: 641,
                                                                             columnNumber: 41
                                                                         }, this)
                                                                     }, index, false, {
                                                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                                                        lineNumber: 572,
+                                                                        lineNumber: 640,
                                                                         columnNumber: 39
                                                                     }, this);
                                                                 }
                                                             })
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                                            lineNumber: 544,
+                                                            lineNumber: 612,
                                                             columnNumber: 31
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/retrospective-chat.tsx",
-                                                    lineNumber: 534,
+                                                    lineNumber: 602,
                                                     columnNumber: 27
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/retrospective-chat.tsx",
-                                            lineNumber: 532,
+                                            lineNumber: 600,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true)
                             }, void 0, false, {
                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                lineNumber: 428,
+                                lineNumber: 496,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/retrospective-chat.tsx",
-                            lineNumber: 427,
+                            lineNumber: 495,
                             columnNumber: 15
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/retrospective-chat.tsx",
-                        lineNumber: 426,
+                        lineNumber: 494,
                         columnNumber: 13
                     }, this)
                 }, void 0, false) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1297,7 +1361,7 @@ function RetrospectiveChat() {
                                         className: "h-16 w-16 text-primary mx-auto mb-4"
                                     }, void 0, false, {
                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                        lineNumber: 598,
+                                        lineNumber: 666,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1305,7 +1369,7 @@ function RetrospectiveChat() {
                                         children: "Tecnologia da Informação"
                                     }, void 0, false, {
                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                        lineNumber: 599,
+                                        lineNumber: 667,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1314,20 +1378,20 @@ function RetrospectiveChat() {
                                             "Foi um 2025 cheio de desafios e realizações. ",
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                                lineNumber: 601,
+                                                lineNumber: 669,
                                                 columnNumber: 64
                                             }, this),
                                             "Vamos em busca de mais conquistas!"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                        lineNumber: 600,
+                                        lineNumber: 668,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                lineNumber: 597,
+                                lineNumber: 665,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1341,35 +1405,35 @@ function RetrospectiveChat() {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/components/retrospective-chat.tsx",
-                                        lineNumber: 606,
+                                        lineNumber: 674,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/retrospective-chat.tsx",
-                                lineNumber: 604,
+                                lineNumber: 672,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/retrospective-chat.tsx",
-                        lineNumber: 596,
+                        lineNumber: 664,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/retrospective-chat.tsx",
-                    lineNumber: 595,
+                    lineNumber: 663,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/retrospective-chat.tsx",
-                lineNumber: 423,
+                lineNumber: 491,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/retrospective-chat.tsx",
-        lineNumber: 418,
+        lineNumber: 486,
         columnNumber: 5
     }, this);
 }

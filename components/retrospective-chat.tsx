@@ -1,8 +1,76 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+
+function AnimatedNumber({ value }: { value: string }) {
+  const [displayValue, setDisplayValue] = useState(0)
+  
+  useEffect(() => {
+    // Extrair apenas números do valor
+    const numericMatch = value.match(/[\d.,]+/)
+    if (!numericMatch) {
+      setDisplayValue(0)
+      return
+    }
+    
+    const numericString = numericMatch[0].replace(/\./g, '').replace(',', '.')
+    const targetValue = parseFloat(numericString)
+    
+    if (isNaN(targetValue)) {
+      setDisplayValue(0)
+      return
+    }
+    
+    const duration = 1500 // 1.5 segundos
+    const steps = 60
+    const increment = targetValue / steps
+    let current = 0
+    let step = 0
+    
+    const timer = setInterval(() => {
+      step++
+      current += increment
+      
+      if (step >= steps) {
+        setDisplayValue(targetValue)
+        clearInterval(timer)
+      } else {
+        setDisplayValue(current)
+      }
+    }, duration / steps)
+    
+    return () => clearInterval(timer)
+  }, [value])
+  
+  // Formatar o número de volta
+  const formatNumber = (num: number) => {
+    const hasComma = value.includes(',')
+    const hasPlus = value.includes('+')
+    const hasPercent = value.includes('%')
+    
+    let formatted = ''
+    
+    if (hasComma) {
+      // Se tem vírgula, é decimal (ex: 97,63%)
+      formatted = num.toFixed(2).replace('.', ',')
+    } else if (num >= 1000) {
+      // Números grandes sem decimal
+      formatted = Math.round(num).toString()
+    } else {
+      formatted = Math.round(num).toString()
+    }
+    
+    if (hasPlus) formatted += '+'
+    if (hasPercent) formatted += '%'
+    
+    return formatted
+  }
+  
+  return <>{formatNumber(displayValue)}</>
+}
+
 import {
   Sparkles,
   TrendingUp,
@@ -248,7 +316,7 @@ export function RetrospectiveChat() {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (audioRef.current) {
-        audioRef.current.volume = 0.3
+        audioRef.current.volume = 0.2
         audioRef.current.play().catch(console.error)
         setIsPlaying(true)
       }
@@ -425,7 +493,7 @@ export function RetrospectiveChat() {
           <>
             <div className="flex-1 flex items-center justify-center p-2 md:p-8">
               <div className="w-full md:max-w-5xl">
-                <div className="space-y-2 md:space-y-6 animate-in fade-in-0 slide-in-from-right-10 duration-700">
+                <div className="space-y-2 animate-in fade-in-0 slide-in-from-right-10 duration-700">
                   {isTyping ? (
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
                       <div className="flex-shrink-0 animate-in fade-in-0 zoom-in-95 duration-700">
@@ -529,7 +597,7 @@ export function RetrospectiveChat() {
                       </div>
 
                       {content.metric && (
-                        <div className="flex items-start gap-0 md:gap-4">
+                        <div className="flex items-start gap-0 md:gap-4 -mt-2">
                           <div className="flex-shrink-0 w-0 md:w-32 hidden md:block" />
                           <Card className="p-4 md:p-10 bg-card/80 backdrop-blur-sm border-2 border-primary/30 hover:border-primary/50 transition-colors animate-in fade-in-0 zoom-in-95 duration-500 w-full">
                             <div className="flex items-start justify-between gap-6 mb-6">
@@ -555,7 +623,7 @@ export function RetrospectiveChat() {
                                       <Card key={index} className="p-4 md:p-6 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30">
                                         <div className="text-center space-y-2">
                                           <div className="text-3xl md:text-5xl font-bold text-primary">
-                                            {number}
+                                            <AnimatedNumber value={number} />
                                           </div>
                                           <div className="text-sm md:text-base font-semibold text-foreground">
                                             {label}
