@@ -665,7 +665,7 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
 
           </>
         ) : (
-          <div className="flex-1 overflow-y-auto p-4 md:p-8">
+          <div className="flex-1 overflow-y-auto p-4 md:p-8 mt-12">
             <div className="max-w-7xl mx-auto space-y-8">
               {/* Header */}
               <div className="text-center space-y-6 animate-in fade-in-0 zoom-in-95 duration-700">
@@ -685,11 +685,11 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
                   </div>
                 </div>
                 
-                <h3 className="text-4xl md:text-5xl font-bold text-balance">
+                <h4 className="text-4xl md:text-5xl font-bold text-balance">
                   {userName ? `${userName}, tivemos um 2025 cheio de desafios e realizações. Vamos em busca de mais conquistas!` : 'Tivemos um 2025 cheio de desafios e realizações. Vamos em busca de mais conquistas!'}
-                </h3>
+                </h4>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Um resumo completo de todas as conquistas e resultados do departamento.
+                  Um resumo completo de todas os resultados do departamento.
                 </p>
               </div>
 
@@ -744,12 +744,12 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
 
               {/* Footer */}
               <div className="text-center space-y-6 pt-8 pb-8">
-                <Card className="p-8 bg-primary/5 border-primary/20 max-w-2xl mx-auto">
-                  {/* <p className="text-2xl md:text-3xl font-semibold mb-4 text-balance">Tecnologia da Informação</p>
+                 {/*<Card className="p-8 bg-primary/5 border-primary/20 max-w-2xl mx-auto">
+                  <p className="text-2xl md:text-3xl font-semibold mb-4 text-balance">Tecnologia da Informação</p>
                   <p className="text-muted-foreground text-lg text-pretty">
                     Foi um 2025 cheio de desafios e realizações. <br />Vamos em busca de mais conquistas!
-                  </p> */}
-                </Card>
+                  </p> 
+                </Card>*/}
                 <Button onClick={handleRestart} variant="outline" size="lg" className="gap-2 bg-transparent">
                   Ver Novamente
                   <Sparkles className="h-4 w-4" />
