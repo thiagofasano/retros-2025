@@ -21,6 +21,9 @@ import {
   MessageSquare,
   CheckCircle2,
   Database,
+  Network,
+  Settings,
+  Award,
 } from "lucide-react"
 
 const metrics = [
@@ -160,6 +163,74 @@ const metrics = [
       }
     ]
   },
+  {
+    label: "Valor para a Fiotec",
+    icon: <Network className="h-8 w-8" />,
+    message:
+      "Valor para a Fiotec - Parte 3! Continuamos com mais conquistas em infraestrutura, capacitação e soluções tecnológicas.",
+    highlights: [
+      {
+        title: "Infraestrutura Robusta",
+        description: "Upgrade de links de internet com planejamento de load balance entre múltiplos provedores"
+      },
+      {
+        title: "Treinamento Qlik",
+        description: "Analistas de Brasília capacitados para criar próprias aplicações no Qlik Sense"
+      },
+      {
+        title: "AVD Tesouraria",
+        description: "Ambiente dedicado com ajustes de compatibilidade para sistemas sensíveis como CISA Santander"
+      },
+      {
+        title: "Acesso Exterior",
+        description: "APP de liberação de acesso no exterior com alertas inteligentes sobre Firewall e VMs"
+      }
+    ]
+  },
+  {
+    label: "Valor para Fiotec",
+    icon: <Settings className="h-8 w-8" />,
+    message:
+      "Valor para Fiotec - Parte 4! Avanços importantes em gestão financeira, conformidade e automatização de processos.",
+    highlights: [
+      {
+        title: "Gestão Financeira",
+        description: "Padronização de tags Azure para rastreabilidade de custos, Sistema de Diárias, Controle de compromissos e pagamentos"
+      },
+      {
+        title: "Conformidade",
+        description: "Atualização de contratos com cláusulas de compliance, Campos de diversidade conforme Portaria GM/MS 5.801/2024, Aderência à LGPD"
+      },
+      {
+        title: "Processos",
+        description: "Automatização de geração de boletos Editora Fiocruz, Integração PAI com SAP para emendas parlamentares, Imunidade ICMS RJ"
+      }
+    ]
+  },
+  {
+    label: "Sistema de Bolsas - Melhorias",
+    icon: <Award className="h-8 w-8" />,
+    message:
+      "Sistema de Bolsas - Melhorias! Implementamos importantes aprimoramentos em performance, segurança e processos do sistema de bolsas.",
+    highlights: [
+      {
+        title: "Performance",
+        description: "Migração de jobs do Jenkins para Hangfire eliminando erros recorrentes. Dashboard DataDog para monitoramento"
+      },
+      {
+        title: "Segurança",
+        description: "Job para monitoramento de duplicidades prevenindo pagamentos duplicados de bolsas"
+      },
+      {
+        title: "Processos",
+        description: "Assinatura pelo Analista de Projeto, notificações de pendências, ajustes em fluxos de aprovação"
+      },
+      {
+        title: "Cadastros",
+        description: "Melhorias no cadastro de bolsistas e celetistas com campos de diversidade e inclusão"
+      }
+    ]
+  },
 ]
 
 export function RetrospectiveChat() {
@@ -177,6 +248,7 @@ export function RetrospectiveChat() {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (audioRef.current) {
+        audioRef.current.volume = 0.3
         audioRef.current.play().catch(console.error)
         setIsPlaying(true)
       }
@@ -302,7 +374,7 @@ export function RetrospectiveChat() {
   const getCurrentContent = () => {
     if (currentStep === -1) {
       return {
-        text: "Olá! Eu so um Robô criado pela TI para apresentar a Retrospectiva de 2025 do departamento. Vamos juntos conhecer?",
+        text: "Olá! Eu sou um Robô criado pela TI para apresentar a Retrospectiva de 2025 do departamento. Vamos juntos conhecer?",
         metric: null,
       }
     }
@@ -345,7 +417,7 @@ export function RetrospectiveChat() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex flex-col">
       <audio ref={audioRef} loop>
-        <source src="/placeholder.mp3" type="audio/mpeg" />
+        <source src="/audio/musica.mp3" type="audio/mpeg" />
       </audio>
 
       <div className="flex-1 flex flex-col">
@@ -389,6 +461,11 @@ export function RetrospectiveChat() {
                                 className="h-full bg-primary transition-all duration-100 ease-linear"
                                 style={{ width: `${progress}%` }}
                               />
+                            </div>
+                          )}
+                          {currentStep >= 0 && (
+                            <div className="text-xs text-white/60 mt-2 font-medium">
+                              {currentStep + 1} / {metrics.length}
                             </div>
                           )}
                         </div>
@@ -437,6 +514,11 @@ export function RetrospectiveChat() {
                                   className="h-full bg-primary transition-all duration-100 ease-linear"
                                   style={{ width: `${progress}%` }}
                                 />
+                              </div>
+                            )}
+                            {currentStep >= 0 && (
+                              <div className="text-xs text-white/60 mt-2 font-medium">
+                                {currentStep + 1} / {metrics.length}
                               </div>
                             )}
                           </div>
@@ -514,9 +596,9 @@ export function RetrospectiveChat() {
             <div className="text-center space-y-6 animate-in fade-in-0 zoom-in-95 duration-700 max-w-2xl">
               <Card className="p-10 bg-primary/5 border-primary/20">
                 <Sparkles className="h-16 w-16 text-primary mx-auto mb-4" />
-                <p className="text-3xl font-semibold mb-4 text-balance">Parabéns pela jornada incrível em 2025!</p>
+                <p className="text-3xl font-semibold mb-4 text-balance">Tecnologia da Informação</p>
                 <p className="text-muted-foreground text-xl text-pretty">
-                  O departamento de TI alcançou resultados extraordinários. Continuem com esse excelente trabalho!
+                  Foi um 2025 cheio de desafios e realizações. <br/ >Vamos em busca de mais conquistas!
                 </p>
               </Card>
               <Button onClick={handleRestart} variant="outline" size="lg" className="gap-2 bg-transparent">

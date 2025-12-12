@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Bot, Sparkles } from "lucide-react"
+import Image from "next/image"
 
 type WelcomePageProps = {
   onStart: () => void
@@ -11,6 +12,20 @@ export function WelcomePage({ onStart }: WelcomePageProps) {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="max-w-2xl w-full text-center space-y-8 animate-in fade-in-0 slide-in-from-bottom-4 duration-700">
+        {/* Fiotec Logo */}
+        <div className="flex justify-center mb-6">
+          <Image 
+            src="/logo-fiotec.png" 
+            alt="Logo Fiotec" 
+            width={100} 
+            height={80}
+            className="object-contain"
+          />
+        </div>
+
+        <br />
+        <br />
+
         {/* Robot Icon */}
         <div className="flex justify-center">
           <div className="relative">
