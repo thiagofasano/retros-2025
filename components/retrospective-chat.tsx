@@ -149,18 +149,42 @@ const getMetrics = (userName: string) => [
       }
     ]
   },
+    {
+    label: "Sistema de Bolsas - Melhorias",
+    icon: <Award className="h-8 w-8" />,
+    message:
+      "Implementamos importantes aprimoramentos em performance, segurança e processos no sistema de bolsas.",
+    highlights: [
+      {
+        title: "Performance",
+        description: "Migração de jobs do Jenkins para Hangfire eliminando erros recorrentes. Dashboard DataDog para monitoramento"
+      },
+      {
+        title: "Segurança",
+        description: "Job para monitoramento de duplicidades prevenindo pagamentos duplicados de bolsas"
+      },
+      {
+        title: "Processos",
+        description: "Assinatura pelo Analista de Projeto, notificações de pendências, ajustes em fluxos de aprovação"
+      },
+      {
+        title: "Cadastros",
+        description: "Melhorias no cadastro de bolsistas e celetistas com campos de diversidade e inclusão"
+      }
+    ]
+  },
   {
     label: "Valor para Nossa Equipe",
     icon: <Users className="h-8 w-8" />,
     message:
-      "Valor para Nossa Equipe! Investimos em ferramentas e processos que melhoram a produtividade e organização do nosso time de TI.",
+      "Investimos em ferramentas e processos que melhoram a produtividade e organização do nosso time de TI.",
     highlights: [
       {
         title: "Documentação Técnica",
         description: "Criação de documentos e wikis na Azure para melhorar performance e produtividade da equipe"
       },
       {
-        title: "Azure DevOps",
+        title: "Azure DevOps SCRUM",
         description: "Controle de projetos utilizando metodologia SCRUM para maior organização"
       },
       {
@@ -173,10 +197,10 @@ const getMetrics = (userName: string) => [
     label: "Valor para Usuários",
     icon: <MessageSquare className="h-8 w-8" />,
     message:
-      "Valor para Usuários! Desenvolvemos soluções que fazem diferença no dia a dia de quem utiliza nossos sistemas e serviços.",
+      "Desenvolvemos soluções que fazem diferença no dia a dia de quem utiliza nossos sistemas e serviços.",
     highlights: [
       {
-        title: "ChatBOT com IA",
+        title: "ChatBot com IA",
         description: "Assistente virtual de projetos no PCF e Site Institucional para resolução ágil de dúvidas sobre manuais"
       },
       {
@@ -254,15 +278,7 @@ const getMetrics = (userName: string) => [
       {
         title: "Acesso Exterior",
         description: "APP de liberação de acesso no exterior com alertas inteligentes sobre Firewall e VMs"
-      }
-    ]
-  },
-  {
-    label: "Valor para Fiotec",
-    icon: <Settings className="h-8 w-8" />,
-    message:
-      "Valor para Fiotec - Parte 4! Avanços importantes em gestão financeira, conformidade e automatização de processos.",
-    highlights: [
+      },
       {
         title: "Gestão Financeira",
         description: "Padronização de tags Azure para rastreabilidade de custos, Sistema de Diárias, Controle de compromissos e pagamentos"
@@ -277,30 +293,9 @@ const getMetrics = (userName: string) => [
       }
     ]
   },
-  {
-    label: "Sistema de Bolsas - Melhorias",
-    icon: <Award className="h-8 w-8" />,
-    message:
-      "Sistema de Bolsas - Melhorias! Implementamos importantes aprimoramentos em performance, segurança e processos do sistema de bolsas.",
-    highlights: [
-      {
-        title: "Performance",
-        description: "Migração de jobs do Jenkins para Hangfire eliminando erros recorrentes. Dashboard DataDog para monitoramento"
-      },
-      {
-        title: "Segurança",
-        description: "Job para monitoramento de duplicidades prevenindo pagamentos duplicados de bolsas"
-      },
-      {
-        title: "Processos",
-        description: "Assinatura pelo Analista de Projeto, notificações de pendências, ajustes em fluxos de aprovação"
-      },
-      {
-        title: "Cadastros",
-        description: "Melhorias no cadastro de bolsistas e celetistas com campos de diversidade e inclusão"
-      }
-    ]
-  },
+
+
+
 ]
 
 export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
@@ -367,15 +362,16 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
       return
     } else if (isAutoPlay) {
       setProgress(0)
+      const slideDelay = currentStep === 1 ? 13000 : 10000
       const timer = setTimeout(() => {
         setShowMetric(false)
         setCurrentStep((prev) => prev + 1)
         setProgress(0)
-      }, 10000)
+      }, slideDelay)
 
       const progressInterval = setInterval(() => {
         setProgress((prev) => Math.min(prev + 100 / 100, 100))
-      }, 100)
+      }, slideDelay / 100)
 
       return () => {
         clearTimeout(timer)
@@ -446,8 +442,8 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
     if (currentStep === -1) {
       return {
         text: userName 
-          ? `Olá ${userName}! Prazer em conhecer! Eu sou um Robô criado pela TI para apresentar a Retrospectiva. Vamos juntos conhecer os resultados`
-          : "Olá! Eu sou um Robô criado pela TI para apresentar a Retrospectiva de 2025 do departamento. Vamos juntos conhecer?",
+          ? `Olá ${userName}! Prazer em conhecer! Eu sou um Robô criado pela TI para apresentar a Retrospectiva 2025. Vamos juntos conhecer os resultados?`
+          : "Olá! Eu sou um Robô criado pela TI para apresentar a Retrospectiva de 2025. Vamos juntos conhecer?",
         metric: null,
       }
     }
@@ -601,59 +597,55 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
                         </div>
                       </div>
 
-                      {content.metric && (
-                        <div className="flex items-start gap-0 md:gap-4 -mt-2 md:-mt-12">
+                      {content.metric && content.metric.highlights && (
+                        <div className="flex items-start gap-0 md:gap-4 mt-5 md:-mt-12">
                           <div className="flex-shrink-0 w-0 md:w-32 hidden md:block" />
-                          <Card className="p-4 md:p-10 bg-card/80 backdrop-blur-sm border-2 border-primary/30 hover:border-primary/50 transition-colors animate-in fade-in-0 zoom-in-95 duration-500 w-full">
-                            <div className="flex items-start justify-between gap-6 mb-6">
-                              <div className="flex-1">
-                                <p className="text-xl md:text-3xl font-bold mb-2 text-balance">
-                                  {content.metric.label}
-                                </p>
-                              </div>
+                          <div className="w-full space-y-4 animate-in fade-in-0 zoom-in-95 duration-500">
+                            <div className="flex items-center gap-4 mb-6">
                               <div className="text-primary/80">{content.metric.icon}</div>
+                              <p className="text-xl md:text-3xl font-bold text-balance">
+                                {content.metric.label}
+                              </p>
                             </div>
-                            {content.metric.highlights && (
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                {content.metric.highlights.map((highlight: any, index: number) => {
-                                  const hasNumber = /^\d+[+%]?|^\d+[.,]\d+%/.test(highlight.title)
-                                  
-                                  if (hasNumber) {
-                                    // Design para destaques com números
-                                    const match = highlight.title.match(/^([\d+%.,]+)\s*(.*)/)
-                                    const number = match ? match[1] : highlight.title
-                                    const label = match ? match[2] : ""
-                                    
-                                    return (
-                                      <Card key={index} className="p-4 md:p-6 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30">
-                                        <div className="text-center space-y-2">
-                                          <div className="text-3xl md:text-5xl font-bold text-primary">
-                                            <AnimatedNumber value={number} />
-                                          </div>
-                                          <div className="text-sm md:text-base font-semibold text-foreground">
-                                            {label}
-                                          </div>
-                                          <div className="text-xs md:text-sm text-muted-foreground leading-relaxed pt-2 border-t border-primary/20">
-                                            {highlight.description}
-                                          </div>
-                                        </div>
-                                      </Card>
-                                    )
-                                  } else {
-                                    // Design original para destaques sem números
-                                    return (
-                                      <Card key={index} className="p-4 bg-card/60 border-primary/20 hover:border-primary/40 transition-colors">
-                                        <div className="border-l-4 border-primary/50 pl-3 py-1">
-                                          <h4 className="text-base md:text-lg font-semibold mb-2 text-primary">{highlight.title}</h4>
-                                          <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{highlight.description}</p>
-                                        </div>
-                                      </Card>
-                                    )
-                                  }
-                                })}
-                              </div>
-                            )}
-                          </Card>
+                            <div className={`grid grid-cols-1 gap-4 ${content.metric.highlights.length === 4 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+                              {content.metric.highlights.map((highlight: any, index: number) => {
+                              const hasNumber = /^\d+[+%]?|^\d+[.,]\d+%/.test(highlight.title)
+                              
+                              if (hasNumber) {
+                                // Design para destaques com números
+                                const match = highlight.title.match(/^([\d+%.,]+)\s*(.*)/)
+                                const number = match ? match[1] : highlight.title
+                                const label = match ? match[2] : ""
+                                
+                                return (
+                                  <Card key={index} className="p-4 md:p-6 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30">
+                                    <div className="text-center space-y-2">
+                                      <div className="text-3xl md:text-5xl font-bold text-primary">
+                                        <AnimatedNumber value={number} />
+                                      </div>
+                                      <div className="text-sm md:text-base font-semibold text-foreground">
+                                        {label}
+                                      </div>
+                                      <div className="text-sm md:text-base text-muted-foreground leading-relaxed pt-2 border-t border-primary/20">
+                                        {highlight.description}
+                                      </div>
+                                    </div>
+                                  </Card>
+                                )
+                              } else {
+                                // Design original para destaques sem números
+                                return (
+                                  <Card key={index} className="p-4 bg-card/60 border-primary/20 hover:border-primary/40 transition-colors">
+                                    <div>
+                                      <h4 className="text-base md:text-lg font-semibold mb-2 text-primary">{highlight.title}</h4>
+                                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{highlight.description}</p>
+                                    </div>
+                                  </Card>
+                                )
+                              }
+                              })}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </>
@@ -666,7 +658,7 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
           </>
         ) : (
           <div className="flex-1 overflow-y-auto p-4 md:p-8 mt-12">
-            <div className="max-w-7xl mx-auto space-y-8">
+            <div className="max-w-7xl mx-auto space-y-8 p-4 mt-12">
               {/* Header */}
               <div className="text-center space-y-6 animate-in fade-in-0 zoom-in-95 duration-700">
                 {/* Robot celebrating */}
@@ -686,10 +678,10 @@ export function RetrospectiveChat({ userName = "" }: { userName?: string }) {
                 </div>
                 
                 <h4 className="text-4xl md:text-5xl font-bold text-balance">
-                  {userName ? `${userName}, tivemos um 2025 cheio de desafios e realizações. Vamos em busca de mais conquistas!` : 'Tivemos um 2025 cheio de desafios e realizações. Vamos em busca de mais conquistas!'}
+                  {userName ? `${userName}, tivemos em TI um 2025 cheio de desafios e realizações.` : 'Tivemos em TI um 2025 cheio de desafios e realizações.'}
                 </h4>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Um resumo completo de todas os resultados do departamento.
+                  Veja o resumo completo de todos os resultados do departamento.
                 </p>
               </div>
 

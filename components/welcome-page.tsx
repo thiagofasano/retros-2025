@@ -52,11 +52,11 @@ export function WelcomePage({ onStart }: WelcomePageProps) {
 
         {/* Title */}
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-balance">
+          <h2 className="text-4xl md:text-5xl font-bold leading-tight text-balance">
             Vamos conhecer juntos os principais resultados do departamento de TI?
-          </h1>
+          </h2>
           <p className="text-lg text-muted-foreground text-pretty max-w-xl mx-auto">
-            Informe seu nome e clique em ver retrospectiva para começar a explorar as conquistas de 2025!
+            Informe seu nome e clique em ver retrospectiva para iniciar!
           </p>
         </div>
 
